@@ -39,3 +39,14 @@ User prompt ---> LLM ---> Output
 - **Prediction** → Given some text (a prompt), it predicts the next most likely word — again and again — to generate coherent responses.
 
 
+## Models and their capabilities
+### GPT vs Reasoning Models
+
+| Aspect              | GPT (Generative Pretrained Transformer)                          | Reasoning Models                                   |
+|---------------------|------------------------------------------------------------------|----------------------------------------------------|
+| **Core Design**     | Large-scale **language generator** based on next-token prediction | Built for **logical, step-by-step reasoning**      |
+| **Training Objective** | Trained on massive text data with **causal LM objective** (predict next word) | Trained/fine-tuned on **reasoning tasks** with supervision or RL |
+| **Strengths**       | - Fluency in language <br> - Broad knowledge <br> - Creative writing & summarization | - Handles math, logic, proofs <br> - Produces step-by-step reasoning <br> - Better at structured problem-solving |
+| **Weaknesses**      | - Struggles with precise multi-step reasoning <br> - Can "hallucinate" facts | - Less fluent in open-ended text <br> - Narrower domain focus |
+| **Examples**        | GPT-3, GPT-4, LLaMA, Mistral                                    | AlphaGeometry, OpenAI o1 (reasoning LLM), Minerva  |
+| **Key Difference**  | **General-purpose language model** (great at fluency & knowledge) | **Specialized problem solver** (great at reasoning & logic) |
