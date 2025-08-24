@@ -103,3 +103,22 @@ A prompt is simply the text you send to a Large Language model
 - Asking a Large Language Model (LLM) to perform a task without providing any examples of how the task should be done.
 
 - The model relies only on the instruction and its pre-trained knowledge
+
+## Few-shot prompting
+- Asking an LLM to perform a task while **providing a few examples of how the task should be done**.
+
+- The model uses both the **provided examples** and **its pre-trained knowledge** to generate a more accurate or contextually appropriate response.
+
+
+## Chain of Thought prompting
+- Asking an LLM to show its reasoning steps when solving a problem, rather than giving only the final answer.
+
+- Especially useful for tasks requiring logic, arithmetic, or multi-step reasoning.
+
+- Example instruction: “Explain your reasoning step by step, then give the final answer.”
+
+
+# WORKING WITH LLM
+
+## Invokig the LLM
+- calling the LLM from our code
