@@ -50,3 +50,56 @@ User prompt ---> LLM ---> Output
 | **Weaknesses**      | - Struggles with precise multi-step reasoning <br> - Can "hallucinate" facts | - Less fluent in open-ended text <br> - Narrower domain focus |
 | **Examples**        | GPT-3, GPT-4, LLaMA, Mistral                                    | AlphaGeometry, OpenAI o1 (reasoning LLM), Minerva  |
 | **Key Difference**  | **General-purpose language model** (great at fluency & knowledge) | **Specialized problem solver** (great at reasoning & logic) |
+
+
+## Token
+- The **smallest unit of text** the model processes , like words or parts of words
+
+## Context
+- The surrounding text or information the model uses to understand and generate relevant response
+- e.g
+1. user input
+2. instruction
+3. additional information
+4. message history
+
+## Context-window
+- The **maximum number of tokens an LLM can read and use at thesame tim** to generate or predict text
+
+
+## Inference
+- The process where an LLM take input text and generates an ouput based on what it has learned
+- Inference is basically running the trained model to produce results.
+```
+Train  ---> LLM (learning happens here)
+Inference ---> LLM (model is used here, no learning)
+```
+
+
+# Prompt Engineering
+- Used to improve the capacity of LLMs on a wide range of common
+and complex tasks such as question answering and arithmetic reasoning
+
+## Prompt
+A prompt is simply the text you send to a Large Language model
+### Structure of prompt
+- Instruction
+- Input data
+- Context
+- Output Indicator
+
+#### Structure of a Prompt
+
+1. Instruction → What you want the model to do.
+
+2. Input Data → The content or data the model should work with.
+
+3. Context → Additional background to guide the model.
+
+4. Output Indicator → The format or style of the expected response.
+
+
+## Zero-shot prompting
+- Asking a Large Language Model (LLM) to perform a task without providing any examples of how the task should be done.
+
+- The model relies only on the instruction and its pre-trained knowledge
