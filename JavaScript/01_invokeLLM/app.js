@@ -10,6 +10,10 @@ const completion=await groq.chat.completions.create({
     model:'llama-3.3-70b-versatile',
     messages:[
         {
+            role:'system',
+            content:'You are vData , a smart personal assistant'
+        },
+        {
             role:'user',
             content:'Hi'
         },

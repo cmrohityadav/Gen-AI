@@ -122,3 +122,16 @@ A prompt is simply the text you send to a Large Language model
 
 ## Invokig the LLM
 - calling the LLM from our code
+
+## System prompt
+
+example
+```javascript
+{
+            role:'system',
+            content:'You are vData , a smart personal assistant'
+},
+
+```
+
+
