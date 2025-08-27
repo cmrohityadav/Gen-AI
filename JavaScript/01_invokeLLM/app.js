@@ -10,7 +10,8 @@ const completion=await groq.chat.completions.create({
     model:'llama-3.3-70b-versatile',
     temperature:1,
     top_p:0.2,
-    stop:''
+    stop:'',
+    max_completion_tokens:'',
     messages:[
         {
             role:'system',
