@@ -168,7 +168,7 @@ The maximum number of tokens that can be generated in the chat completion. The t
 ![Naive Retrieval Based Solution](./images/rag_naive_Screenshot%202025-09-01%20211638.png)
 
 ##  RAG Pipeline Phases
-1. indexing phase -> Provide the data
+1. **Indexing Phase** -> Provide the data
 
 ![Indexing phase](./images/indexing_phase_Screenshot%202025-09-01%20213311.png)
 - This is like preparing your notes before an exam.
@@ -186,7 +186,12 @@ So later, when someone asks a question, the system can quickly find the most rel
 📌 Example:
 - You upload your science textbook → it gets processed and indexed.
 
-2. Reterival Phase ->Chatting with data
+2. **Reterival Phase** ->Chatting with data
+![vector searching ](/images//Vector_search_Screenshot%202025-09-01%20225607.png)
+
+![reterival_phase](/images/reterival_phase_Screenshot%202025-09-01%20225805.png)
+
+![Rag Pipeline](/images/whole_rag_Screenshot%202025-09-01%20230113.png)
 - This is when a user asks a question.
 
 - The query is also turned into an embedding.
@@ -203,3 +208,49 @@ You ask: “Who discovered gravity?”
 - System retrieves passage: “Isaac Newton discovered gravity...”
 
 - AI answers: “Gravity was discovered by Isaac Newton.”
+
+
+
+## 📊 Vector Databases Comparison
+
+Vector databases are used in **RAG pipelines** to store and search embeddings efficiently.  
+Here’s a comparison of popular options:
+
+---
+
+### 🔹 Open-Source & Free
+
+| Name        | Language / Base  | Key Features | Best For | Notes |
+|-------------|-----------------|--------------|----------|-------|
+| **FAISS**   | C++ / Python    | Fast similarity search, large-scale, no server required | Research, prototyping | Not a full DB, just a library |
+| **Weaviate**| Go              | Hybrid search (vector + keyword), GraphQL API, modules (e.g., transformers) | RAG apps, semantic search | Can run locally or use Weaviate Cloud |
+| **Milvus**  | C++ / Go        | Highly scalable, distributed, integrates with Zilliz Cloud | Large datasets, enterprise-scale search | Community edition is free |
+| **Qdrant**  | Rust            | High-performance, REST/gRPC API, filtering support | Production-ready search | Lightweight, easy to deploy |
+| **Vespa**   | Java / C++      | Handles structured + unstructured data, good for recommendations | Complex search & recommendation engines | Heavier setup |
+| **Annoy**   | C++ / Python    | Memory-efficient, approximate nearest neighbor | Simple recommendation tasks | Not as feature-rich as others |
+| **Postgres + pgvector** | SQL (Postgres) | Store/search vectors inside Postgres DB | Small/medium projects | Easy if you already use Postgres |
+| **ElasticSearch (vector plugin)** | Java | Combines full-text + vector search | Hybrid search | Requires extra setup |
+
+---
+
+### 🔹 Paid / Managed SaaS
+
+| Name                | Based On    | Key Features | Best For | Notes |
+|---------------------|-------------|--------------|----------|-------|
+| **Pinecone**        | Proprietary | Fully managed, scalable, low-latency, API-first | Production RAG apps | No self-hosted option |
+| **Weaviate Cloud**  | Weaviate    | Managed Weaviate instances | Teams who want no DevOps | Pay-as-you-go |
+| **Qdrant Cloud**    | Qdrant      | Managed Qdrant clusters | Easy deployment | Auto-scaling |
+| **Milvus (Zilliz Cloud)** | Milvus | Managed Milvus | Enterprise-scale apps | Handles billions of vectors |
+| **Vespa Cloud**     | Vespa       | Managed Vespa instances | Search + recommender systems | More enterprise-focused |
+| **Redis Enterprise (Vector Search)** | Redis | In-memory speed, supports hybrid | Real-time apps | Cloud & paid tiers |
+| **AWS OpenSearch / Azure Cognitive Search** | Elastic / Azure | Cloud-native vector search + full-text | Enterprise cloud users | Tied to cloud provider ecosystem |
+
+---
+
+### ✅ Recommendations
+
+- **Learning & Small Projects** → FAISS, Qdrant, pgvector  
+- **Hybrid Search (text + vectors)** → Weaviate, ElasticSearch, Redis  
+- **Enterprise & Scale** → Pinecone, Milvus (Zilliz Cloud), Vespa  
+
+---
