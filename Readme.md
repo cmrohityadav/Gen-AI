@@ -150,3 +150,56 @@ Up to 4 sequences where the API will stop generating further tokens. The returne
 ### max_completion_tokens
 The maximum number of tokens that can be generated in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length.
 
+## Structured output
+
+
+
+
+
+# RAG
+- RAG stands for Retrieval-Augmented Generation
+- **Retrieval** → Search for relevant documents from a knowledge base using embeddings + vector database.
+
+- **Augmentation** → Add those documents as context to the user’s query.
+
+- **Generation** → The LLM (Large Language Model) generates an answer using both the query and the retrieved context.
+
+## Naive Retrieval Based Solution Approach
+![Naive Retrieval Based Solution](./images/rag_naive_Screenshot%202025-09-01%20211638.png)
+
+##  RAG Pipeline Phases
+1. indexing phase -> Provide the data
+
+![Indexing phase](./images/indexing_phase_Screenshot%202025-09-01%20213311.png)
+- This is like preparing your notes before an exam.
+
+- You collect documents (PDFs, web pages, text files, etc.).
+
+- Convert them into embeddings (numerical vectors that capture meaning).
+
+Store those vectors in a vector database (e.g., FAISS, Pinecone).
+
+👉 Why?
+So later, when someone asks a question, the system can quickly find the most relevant pieces of info.
+
+
+📌 Example:
+- You upload your science textbook → it gets processed and indexed.
+
+2. Reterival Phase ->Chatting with data
+- This is when a user asks a question.
+
+- The query is also turned into an embedding.
+
+- The system compares it with stored vectors → retrieves the closest matches (relevant passages).
+
+- Those passages are sent along with the user’s question to the LLM (e.g., GPT).
+
+- The LLM generates a final answer using both the retrieved docs + query.
+
+📌 Example:
+You ask: “Who discovered gravity?”
+
+- System retrieves passage: “Isaac Newton discovered gravity...”
+
+- AI answers: “Gravity was discovered by Isaac Newton.”
