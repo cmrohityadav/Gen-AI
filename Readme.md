@@ -187,6 +187,7 @@ So later, when someone asks a question, the system can quickly find the most rel
 - You upload your science textbook → it gets processed and indexed.
 
 2. **Reterival Phase** ->Chatting with data
+
 ![vector searching ](/images//Vector_search_Screenshot%202025-09-01%20225607.png)
 
 ![reterival_phase](/images/reterival_phase_Screenshot%202025-09-01%20225805.png)
