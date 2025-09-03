@@ -33,7 +33,7 @@ SYSTEM_PROMPT=f"""
     You should only ans the user based on the following context and navigate the user to open the right page number to know more.
 
     Context:
-    {context}
+    {context} 
 """
 
 
