@@ -255,3 +255,12 @@ Here’s a comparison of popular options:
 - **Enterprise & Scale** → Pinecone, Milvus (Zilliz Cloud), Vespa  
 
 ---
+
+```bash
+
+pip install -qU langchain-community pypdf
+
+pip install -qU langchain-text-splitters
+
+
+```
