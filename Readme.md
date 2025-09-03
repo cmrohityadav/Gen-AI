@@ -262,5 +262,9 @@ pip install -qU langchain-community pypdf
 
 pip install -qU langchain-text-splitters
 
+pip install -qU langchain-openai
+
+pip install langchain-qdrant
+
 
 ```
