@@ -13,6 +13,12 @@ vector_db=QdrantVectorStore.from_existing_collection(
 )
 
 
+from rq import SimpleWorker, Queue
+from redis import Redis
+redis_conn = Redis()
+
+
+queue = Queue(connection=redis_conn)
 
 def process_query(query:str):
     print("Searching chunks",query)
@@ -50,3 +56,9 @@ def process_query(query:str):
     else:
         print("⚠️ Unexpected response format:", data)
 
+
+
+
+if __name__ == "__main__":
+    worker = SimpleWorker([queue], connection=redis_conn)
+    worker.work()
