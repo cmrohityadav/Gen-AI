@@ -256,6 +256,8 @@ Here’s a comparison of popular options:
 
 ---
 
+
+
 ```bash
 
 pip install -qU langchain-community pypdf
@@ -268,3 +270,8 @@ pip install langchain-qdrant
 
 
 ```
+
+## Tool calling
+- Used to interact with external resource such as APIs , database and the web
+
+
