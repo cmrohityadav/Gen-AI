@@ -3,3 +3,4 @@ JavaScript/01_invokeLLM/.env
 Python/RAG/.env
 *venv
 JavaScript/02_toolCalling/.env
+Python/02_RAG/.env
