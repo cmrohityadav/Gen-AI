@@ -274,6 +274,6 @@ pip install langchain-qdrant
 ## Tool calling
 - Used to interact with external resource such as APIs , database and the web
 - Tool calling/function calling
-
+- Using tavily/brave/etc
 
 

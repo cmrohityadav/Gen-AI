@@ -1,9 +1,11 @@
 import dotenv from 'dotenv'
 dotenv.config();
 import Groq from 'groq-sdk'
+import {tavily} from "@tavily/core"
 
 const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+const tvly = tavily({apiKey:process.env.TAVILY_API_KEY});
 async function main() {
     const completion = await client.chat.completions.create({
         model: "llama-3.3-70b-versatile",
@@ -89,7 +91,15 @@ async function main() {
 await main();
 
 async function webSearch({ query }) {
-    console.log("Calling web search...........")
+    console.log("Calling web search...........");
 
-    return "Iphone was launched on 20 september 2024"
+    const response=await tvly.search(query);
+
+    // return "Iphone was launched on 20 september 2024"
+
+    console.log("searched response: ",response);
+
+    const finalResult=response.results.map((result)=>result.content).join("\n\n");
+
+    return finalResult;
 }
