@@ -7,10 +7,8 @@ const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const tvly = tavily({apiKey:process.env.TAVILY_API_KEY});
 async function main() {
-    const completion = await client.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-        temperature: 0,
-        messages: [
+
+    const messages=[
             {
                 role: 'system',
                 content: `You are smart personal assistant who answer the asked question .
@@ -19,9 +17,15 @@ async function main() {
             },
             {
                 role: 'user',
-                content: 'when was iphone 16 was launched'
+                content: 'when was iphone 17 was launched'
             }
-        ],
+        ];
+
+    
+    const completion = await client.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0,
+        messages:messages,
         tools: [
             {
                 type: 'function',
@@ -43,11 +47,11 @@ async function main() {
 
             }
         ],
-        tool_choice: {
-            type: "function",
-            function: { name: "webSearch" }
-        }
+        tool_choice: 'auto'
+        
     });
+
+    messages.push(completion.choices[0].message);
 
     const toolCalls = completion.choices[0].message.tool_calls;
 
@@ -67,8 +71,49 @@ async function main() {
         if (functionName == 'webSearch') {
             const toolResult = await webSearch(JSON.parse(functionParams));
             console.log("Tool result: ", toolResult);
+
+            messages.push({
+                tool_call_id:tool.id,
+                role:'tool',
+                name:functionName,
+                content:toolResult,
+            })
         }
     }
+
+
+
+    const completion2 = await client.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0,
+        messages:messages,
+        tools: [
+            {
+                type: 'function',
+                function: {
+                    name: 'webSearch',
+                    description: 'Search the latest information and  realtime data on the internet',
+                    parameters: {
+                        type: 'object',
+                        properties: {
+                            query: {
+                                type: 'string',
+                                description: 'The search query to perform search on'
+                            }
+                        },
+                        required: ["query"]
+                    },
+
+                },
+
+            }
+        ],
+        tool_choice:'auto'
+    });
+
+    console.log("Final response : ", JSON.stringify(completion2.choices[0].message, null, 2));
+
+
 
     // console.log("response from LLM: ", JSON.stringify(completion.choices[0].message, null, 2));
     /*
