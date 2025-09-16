@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config();
+import readline from 'node:readline/promises'
 import Groq from 'groq-sdk'
 import { tavily } from "@tavily/core"
 
@@ -9,21 +10,37 @@ const tvly = tavily({ apiKey: process.env.TAVILY_API_KEY });
 
 async function main() {
 
+    const rl=readline.createInterface({input:process.stdin,output:process.stdout});
+
     const messages = [
         {
             role: 'system',
             content: `You are smart personal assistant who answer the asked question .
                  You have access to following tools:
-                 1. webSearch({query}:{query:string}) //Search the latest information and  realtime data on the internet`,
-        },
-        {
-            role: 'user',
-            content: 'current LTP of TCS stock today from nse'
-            // 'when was iphone 17 was launched'
+                 1. webSearch({query}:{query:string}) //Search the latest information and  realtime data on the internet.
+                 2. current date and time : ${new Date().toUTCString()}`,
+
         }
+        // {
+        //     role: 'user',
+        //     content: 'current LTP of TCS stock today from nse'
+        //     // 'when was iphone 17 was launched'
+        // }
     ];
 
-    while (true) {
+    while(true){
+
+        const question=await rl.question("You: ");
+
+        if(question=='bye'){
+            break;
+        }
+        messages.push({
+            role:'user',
+            content:question
+        })
+
+        while (true) {
         const completion = await client.chat.completions.create({
             model: "llama-3.3-70b-versatile",
             temperature: 0,
@@ -65,14 +82,14 @@ async function main() {
         }
 
         for (const tool of toolCalls) {
-            console.log('tool: ', tool);
+            // console.log('tool: ', tool);
 
             const functionName = tool.function.name;
             const functionParams = tool.function.arguments;
 
             if (functionName == 'webSearch') {
                 const toolResult = await webSearch(JSON.parse(functionParams));
-                console.log("Tool result: ", toolResult);
+                // console.log("Tool result: ", toolResult);
 
                 messages.push({
                     tool_call_id: tool.id,
@@ -84,6 +101,11 @@ async function main() {
         }
 
     }
+
+    
+    }
+
+    rl.close();
 
 
 
@@ -122,7 +144,7 @@ async function webSearch({ query }) {
 
     // return "Iphone was launched on 20 september 2024"
 
-    console.log("searched response: ", response);
+    // console.log("searched response: ", response);
 
     const finalResult = response.results.map((result) => result.content).join("\n\n");
 
